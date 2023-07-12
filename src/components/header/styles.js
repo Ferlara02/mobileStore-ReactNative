@@ -21,6 +21,6 @@ export const styles = StyleSheet.create({
     marginTop: StatusBar.currentHeight,
     fontSize: 20,
     color: COLORS.text,
-    fontWeight: "bold",
+    fontFamily: "Poppins-Bold",
   },
 });

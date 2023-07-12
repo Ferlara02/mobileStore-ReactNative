@@ -1,19 +1,21 @@
-import { TouchableHighlight, ImageBackground, Text } from 'react-native';
+import { TouchableHighlight, ImageBackground, Text, useWindowDimensions } from 'react-native';
 
 import { styles } from './styles';
 import { COLORS } from '../../../themes';
+import { useEffect } from 'react';
 
-const CategoryItem = ({ id, name, backgroundColor, backgroundImage, onSelectCategory }) => {
+const CategoryItem = ({ id, name, backgroundColor, backgroundImage, onSelectedCategory }) => {
+  const {width, height} = useWindowDimensions()
   return (
     <TouchableHighlight
-      onPress={() => onSelectCategory(id)}
+      onPress={() => onSelectedCategory(id)}
       style={[styles.container, { backgroundColor }]}
       underlayColor={COLORS.secondary}>
       <ImageBackground
         source={{ uri: backgroundImage }}
-        style={styles.imageBackground}
-        resizeMode="cover">
-        <Text style={styles.categoryName}>{name}</Text>
+        style={width > 650 ? styles.imageBackgroundTablet : styles.imageBackground}
+        resizeMode={width > 650 ? "contain" : "cover"}>
+        <Text style={width > 650 ? styles.categoryNameTablet : styles.categoryName}>{name}</Text>
       </ImageBackground>
     </TouchableHighlight>
   );
