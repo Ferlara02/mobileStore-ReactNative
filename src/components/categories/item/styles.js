@@ -14,7 +14,8 @@ export const styles = StyleSheet.create({
     shadowRadius: 3.84,
     elevation: 5,
     borderRadius: 10,
-    width: 150
+    width: "45%",
+    height: 140
   },
   imageBackground: {
     width: "100%",

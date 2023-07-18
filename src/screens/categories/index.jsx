@@ -6,9 +6,11 @@ import CATEGORIES2 from "../../constants/data/categories2.json";
 import useOrientation from "../../hooks/useOrientation";
 
 
-function Categories({ onSelectedCategory }) {
+function Categories({ navigation, route }) {
   const orientation = useOrientation()
-
+  const onSelectedCategory = (categoryId) => {
+    navigation.navigate("Products", {categoryId})
+  }
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.container}>

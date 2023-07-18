@@ -8,7 +8,8 @@ import categories2 from "../../constants/data/categories2.json";
 import PRODUCTS2 from "../../constants/data/products.json";
 import { COLORS } from "../../themes";
 
-function Products({ onHandleGoBack, categoryId }) {
+function Products({ navigation, route }) {
+  const { categoryId } = route.params;
   const [search, setSearch] = useState("");
   const [borderColor, setBorderColor] = useState(COLORS.third);
   const [filteredProducts, setFilteredProducts] = useState([]);
@@ -41,13 +42,13 @@ function Products({ onHandleGoBack, categoryId }) {
     setSearch("");
     setFilteredProducts([]);
   };
+  const onSelectProduct = ( {productId, name} ) => {
+    navigation.navigate("ProductDetail", { productId, name });
+  };
   return (
     <View style={styles.container}>
       <Text style={styles.catTitle}>{category3.name}</Text>
       <View style={styles.header}>
-        <TouchableOpacity style={styles.goBack} onPress={onHandleGoBack}>
-          <Ionicons name="arrow-back" size={40} color={COLORS.text} />
-        </TouchableOpacity>
         <Input
           onHandleBlur={onHandleBlur}
           onHandleChangeText={onHandleChangeText}
@@ -70,7 +71,7 @@ function Products({ onHandleGoBack, categoryId }) {
         style={styles.products}
         contentContainerStyle={styles.prodList}
         data={search.length > 0 ? filteredProducts : filteredProductsByCategory}
-        renderItem={({ item }) => <Product item={item} />}
+        renderItem={({ item }) => <Product item={item} onSelectProduct={onSelectProduct}/>}
         keyExtractor={(item) => item.id.toString()}
         numColumns={2}
       />

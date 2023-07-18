@@ -1,11 +1,13 @@
 import { Ionicons } from "@expo/vector-icons";
-import { View, Image, Text } from "react-native";
+import { View, Image, Text, TouchableOpacity } from "react-native";
 
 import { styles } from "./styles";
 import { COLORS } from "../../themes";
-const Product = ({ item }) => {
+const Product = ({ item, onSelectProduct }) => {
   return (
-    <View style={styles.productContainer}>
+    <TouchableOpacity
+      style={styles.productContainer}
+      onPress={() => onSelectProduct({ productId: item.id, name: item.name })}>
       <Image source={{ uri: item.image }} style={styles.prodImage} />
       <Text style={styles.textProd} numberOfLines={1} ellipsizeMode="tail">
         {item.name}
@@ -16,10 +18,10 @@ const Product = ({ item }) => {
         </Text>
         <View style={styles.rating}>
           <Text>{item.rating}</Text>
-          <Ionicons name="star" size={20} color="orange"/>
+          <Ionicons name="star" size={20} color="orange" />
         </View>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 
