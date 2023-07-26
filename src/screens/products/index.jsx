@@ -1,15 +1,18 @@
 import { Ionicons } from "@expo/vector-icons";
 import { useState } from "react";
 import { View, Text, TouchableOpacity, FlatList } from "react-native";
+import { useSelector } from "react-redux";
 
 import { styles } from "./styles";
 import { Input, Product } from "../../components";
 import categories2 from "../../constants/data/categories2.json";
-import PRODUCTS2 from "../../constants/data/products.json";
 import { COLORS } from "../../themes";
 
 function Products({ navigation, route }) {
   const { categoryId } = route.params;
+
+  const products = useSelector((state) => state.products.data);
+
   const [search, setSearch] = useState("");
   const [borderColor, setBorderColor] = useState(COLORS.third);
   const [filteredProducts, setFilteredProducts] = useState([]);
@@ -28,7 +31,7 @@ function Products({ navigation, route }) {
     setBorderColor(COLORS.third);
   };
 
-  const filteredProductsByCategory = PRODUCTS2.filter((prod) => prod.categoryId === categoryId);
+  const filteredProductsByCategory = products.filter((prod) => prod.categoryId === categoryId);
   const filterBySearch = (query) => {
     let updateProductList = [...filteredProductsByCategory];
 
@@ -42,7 +45,7 @@ function Products({ navigation, route }) {
     setSearch("");
     setFilteredProducts([]);
   };
-  const onSelectProduct = ( {productId, name} ) => {
+  const onSelectProduct = ({ productId, name }) => {
     navigation.navigate("ProductDetail", { productId, name });
   };
   return (
@@ -71,7 +74,7 @@ function Products({ navigation, route }) {
         style={styles.products}
         contentContainerStyle={styles.prodList}
         data={search.length > 0 ? filteredProducts : filteredProductsByCategory}
-        renderItem={({ item }) => <Product item={item} onSelectProduct={onSelectProduct}/>}
+        renderItem={({ item }) => <Product item={item} onSelectProduct={onSelectProduct} />}
         keyExtractor={(item) => item.id.toString()}
         numColumns={2}
       />

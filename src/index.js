@@ -1,15 +1,18 @@
 import { useFonts } from "expo-font";
 import { useState } from "react";
 import { ActivityIndicator, SafeAreaView, StyleSheet, View } from "react-native";
-import { COLORS } from "./themes";
+import { Provider } from "react-redux";
+
 import { Header } from "./components";
 import RootNavigation from "./navigation";
+import { store } from "./store";
+import { COLORS } from "./themes";
 
 export default function App() {
   const [loaded, error] = useFonts({
     "Poppins-Regular": require("../assets/fonts/Poppins-Regular.ttf"),
     "Poppins-Bold": require("../assets/fonts/Poppins-Bold.ttf"),
-    "Poppins-Light": require("../assets/fonts/Poppins-Light.ttf")
+    "Poppins-Light": require("../assets/fonts/Poppins-Light.ttf"),
   });
   const [isCategorySelected, setIsCategorySelected] = useState(false);
   // const [selectedCategory, setSelectedCategory] = useState(null);
@@ -20,21 +23,23 @@ export default function App() {
   //   setIsCategorySelected(!isCategorySelected);
   // };
 
-  if(!loaded) {
-    return(
+  if (!loaded) {
+    return (
       <View style={styles.loaderContainer}>
-        <ActivityIndicator color={COLORS.text} size={40}/>
+        <ActivityIndicator color={COLORS.text} size={40} />
       </View>
-    )
+    );
   }
 
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.container}>
-        {/* <Header title={headerTitle} /> */}
-        <RootNavigation />
-      </View>
-    </SafeAreaView>
+    <Provider store={store}>
+      <SafeAreaView style={styles.container}>
+        <View style={styles.container}>
+          {/* <Header title={headerTitle} /> */}
+          <RootNavigation />
+        </View>
+      </SafeAreaView>
+    </Provider>
   );
 }
 
@@ -44,6 +49,6 @@ const styles = StyleSheet.create({
   },
   loaderContainer: {
     flex: 1,
-    justifyContent: "center"
-  }
+    justifyContent: "center",
+  },
 });

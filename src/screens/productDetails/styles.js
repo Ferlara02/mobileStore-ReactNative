@@ -52,4 +52,29 @@ export const styles = StyleSheet.create({
     fontSize: 11,
     fontFamily: "Poppins-Regular",
   },
+  containerButton: {
+    marginVertical: 10,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  addCartButton: {
+    width: "80%",
+    backgroundColor: COLORS.primary,
+    padding: 15,
+    borderRadius: 5,
+    alignItems: "center",
+    justifyContent: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+
+    elevation: 5,
+  },
+  addToCartText: {
+    fontFamily: "Poppins-Bold"
+  }
 });
