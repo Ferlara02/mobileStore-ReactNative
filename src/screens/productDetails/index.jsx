@@ -1,20 +1,30 @@
-import { ScrollView, View, Text, Image, TouchableOpacity } from "react-native";
+import { ScrollView, View, Text, Image, TouchableOpacity, ActivityIndicator } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 
 import { styles } from "./styles";
 import { addToCart } from "../../store/cart/cartSlices";
+import { useGetProductByIdQuery } from "../../store/products/apis";
+import { COLORS } from "../../themes";
 
 function ProductDetail({ navigation, route }) {
   const dispatch = useDispatch();
 
-  const products = useSelector((state) => state.products.data);
+  // const products = useSelector((state) => state.products.data);
   const { productId, name } = route.params;
 
-  const product = products.find((prod) => prod.id === productId);
+  const { data, error, isLoading } = useGetProductByIdQuery(productId);
+
+  const product = data?.find((prod) => prod.id === productId);
 
   const onAddToCart = () => {
     dispatch(addToCart(product));
   };
+  if (isLoading)
+    return (
+      <View style={styles.containerLoader}>
+        <ActivityIndicator size="large" color={COLORS.primary} />
+      </View>
+    );
   return (
     <ScrollView style={styles.container} opt>
       <View style={styles.container2}>

@@ -5,6 +5,13 @@ export const styles = StyleSheet.create({
   container: {
     flex: 1
   },
+  containerEmpty: {
+    marginTop: 30,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: COLORS.text,
+    padding: 10
+  },
   listContainer: {
     flex: 1
   },
