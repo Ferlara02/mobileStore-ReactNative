@@ -7,9 +7,7 @@ import { useGetOrdersQuery } from "../../store/orders/apis";
 const Orders = () => {
   const { data, error, isLoading } = useGetOrdersQuery();
 
-  const renderItem = ({ item }) => (
-    <OrderItem {...item}/>
-  );
+  const renderItem = ({ item }) => <OrderItem {...item} />;
   const keyExtractor = (item) => item.id.toString();
   return (
     <View style={styles.container}>
