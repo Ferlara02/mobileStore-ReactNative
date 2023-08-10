@@ -9,15 +9,9 @@ export const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 10,
-    backgroundColor: COLORS.white,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 1,
-    },
-    shadowOpacity: 0.22,
-    shadowRadius: 2.22,
-    elevation: 2,
+    backgroundColor: COLORS.background,
+    borderWidth: 1,
+    borderColor: COLORS.third
   },
   content: {
     width: 320,
@@ -28,7 +22,7 @@ export const styles = StyleSheet.create({
     gap: 10,
   },
   title: {
-    fontFamily: "Poppins-Regular",
+    fontFamily: "Poppins-Bold",
     fontSize: 14,
     color: COLORS.text,
     textAlign: "center"
