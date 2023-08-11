@@ -1,5 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/dist/query/react';
 
+
 import { URL_BASE_FIREBASE_REALTIME_DATABASE } from '../../../constants/firebase';
 
 export const settingsApi = createApi({
