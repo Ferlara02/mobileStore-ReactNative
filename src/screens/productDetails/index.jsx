@@ -31,6 +31,7 @@ function ProductDetail({ navigation, route }) {
         <Image source={{ uri: product.image }} style={styles.prodImage} />
         <View style={styles.containerTitle}>
           <Text style={styles.prodTitle}>{product.name}</Text>
+          <Text>Director: {product.director}</Text>
           <Text style={styles.prodPrice}>
             {product.currency.symbol} {product.price}
           </Text>

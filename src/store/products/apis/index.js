@@ -22,7 +22,19 @@ export const productsApi = createApi({
           ...response[key],
         })),
     }),
+    getFeaturedProducts: builder.query({
+      query: (featured) => `/products.json?orderBy="featured"&equalTo=${featured}`,
+      transformResponse: (response) =>
+        Object.keys(response).map((key) => ({
+          id: key,
+          ...response[key],
+        })),
+    }),
   }),
 });
 
-export const { useGetProductsByCategoryQuery, useGetProductByIdQuery } = productsApi; //exportamos hook para utilizarlo
+export const {
+  useGetProductsByCategoryQuery,
+  useGetProductByIdQuery,
+  useGetFeaturedProductsQuery,
+} = productsApi; //exportamos hook para utilizarlo

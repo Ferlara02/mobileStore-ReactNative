@@ -9,6 +9,6 @@ export const MENUS = [
     id: "2",
     icon: "ios-location-sharp",
     route: "Address",
-    title: "Addres",
+    title: "Address",
   },
 ];

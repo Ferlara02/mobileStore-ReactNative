@@ -3,7 +3,9 @@ import { COLORS } from "../../themes";
 
 export const styles = StyleSheet.create({
   container: {
-
+    width: "100%",
+    padding: 10,
+    alignItems: "center"
   },
   preview: {
     width: "100%",
@@ -23,5 +25,12 @@ export const styles = StyleSheet.create({
     color: COLORS.text,
     fontSize: 14,
     fontFamily: "Poppins-Regular"
-  }
+  },
+  title: {
+    fontFamily: "Poppins-Bold"
+  },
+  addressText: {
+    fontFamily: "Poppins-Regular",
+    marginBottom: 10,
+  },
 });

@@ -10,8 +10,11 @@ import {
   clearCart,
 } from "../../store/cart/cartSlices";
 import { useCreateOrderMutation } from "../../store/orders/apis";
+import { useGetProfileQuery } from "../../store/settings/api";
 
-const Cart = ({navigation}) => {
+const Cart = ({ navigation }) => {
+  const localId = useSelector((state) => state.auth.user.localId);
+  const { data: userData, isLoading: isLoadingUserData } = useGetProfileQuery({ localId });
   const cart = useSelector((state) => state.cart.items);
   const total = useSelector((state) => state.cart.total);
   const [createOrder, { data, isError, error, isLoading }] = useCreateOrderMutation();
@@ -25,16 +28,16 @@ const Cart = ({navigation}) => {
   const onRemoveItemFromCart = (id) => {
     dispatch(removeItemFromCart({ id }));
   };
-
+  
   const onCreateOrder = async () => {
     const newOrder = {
       id: Math.floor(Math.random() * 1000),
       items: cart,
       total,
       user: {
-        id: 1,
+        id: localId,
         name: "John Doe",
-        address: "123 street",
+        address: userData?.address ? userData.address : "123 street",
         phone: 21321312312,
         email: "fsdfds@fddfdsfsd.com",
       },
@@ -50,7 +53,7 @@ const Cart = ({navigation}) => {
     };
     try {
       await createOrder(newOrder);
-      navigation.navigate('Orders');
+      navigation.navigate("ordersTab");
       dispatch(clearCart());
     } catch (error) {
       console.warn({ error });
@@ -64,6 +67,9 @@ const Cart = ({navigation}) => {
       </View>
     );
   }
+
+
+
   return (
     <View style={styles.container}>
       <FlatList

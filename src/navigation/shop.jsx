@@ -12,7 +12,7 @@ const Stack = createNativeStackNavigator();
 function ShopNavigation() {
   return (
     <Stack.Navigator
-      initialRouteName="Categories"
+      initialRouteName="Movies"
       screenOptions={({ navigation }) => ({
         headerTitleStyle: {
           fontFamily: "Poppins-Bold",
@@ -29,7 +29,7 @@ function ShopNavigation() {
           </TouchableOpacity>
         ),
       })}>
-      <Stack.Screen name="Categories" component={Categories} />
+      <Stack.Screen name="Movies" component={Categories} />
       <Stack.Screen name="Products" component={Products} />
       <Stack.Screen
         name="ProductDetail"

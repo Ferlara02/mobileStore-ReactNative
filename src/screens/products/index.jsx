@@ -8,18 +8,19 @@ import { Input, Product } from "../../components";
 import categories2 from "../../constants/data/categories2.json";
 import { useGetProductsByCategoryQuery } from "../../store/products/apis";
 import { COLORS } from "../../themes";
+import { useGetCategoriesQuery } from "../../store/categories/apis";
 
 function Products({ navigation, route }) {
   const { categoryId } = route.params;
-
-  // const products = useSelector((state) => state.products.data);
+  const { data: categoriesData } = useGetCategoriesQuery();
+  
   const { data, error, isLoading } = useGetProductsByCategoryQuery(categoryId);
   const [search, setSearch] = useState("");
   const [borderColor, setBorderColor] = useState(COLORS.third);
   const [filteredProducts, setFilteredProducts] = useState([]);
 
-  const category3 = categories2.find((cat) => cat.id === categoryId);
-
+  const category3 = categoriesData?.find((cat) => cat.id === categoryId);
+  
   const onHandleChangeText = (text) => {
     setSearch(text);
     filterBySearch(text);

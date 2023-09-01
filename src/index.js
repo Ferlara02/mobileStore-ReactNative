@@ -5,6 +5,16 @@ import { Provider } from "react-redux";
 import RootNavigation from "./navigation";
 import { store } from "./store";
 import { COLORS } from "./themes";
+import { init } from "./db";
+
+init()
+  .then(() => {
+    console.log("Initialized DB");
+  })
+  .catch((err) => {
+    console.log("Initializing db failed");
+    console.log(err);
+  })
 
 export default function App() {
   const [loaded, error] = useFonts({
