@@ -19,25 +19,25 @@ Para levantar el server de expo, y abrir la app con Expo Go:
 
 ## Configuración de Bibliotecas
 
-- La aplicación eCommerce de Películas utiliza varias bibliotecas para la navegación y la gestión del estado. Estas son las principales bibliotecas utilizadas:
+La app utiliza varias bibliotecas para la navegación y la gestión del estado. Estas son las principales bibliotecas utilizadas:
 
-@react-navigation/bottom-tabs: Versión 6.5.8
-@react-navigation/native: Versión 6.1.7
-@react-navigation/native-stack: Versión 6.9.13
-@react-navigation/stack: Versión 6.3.17
-@reduxjs/toolkit: Versión 1.9.5
-expo: Versión 48.0.18
-expo-font: Versión 11.1.1
-expo-image-picker: Versión 14.1.1
-expo-screen-orientation: Versión 5.1.1
-expo-status-bar: Versión 1.4.4
-react: Versión 18.2.0
-react-native: Versión 0.71.8
-react-native-gesture-handler: Versión 2.9.0
-react-native-safe-area-context: Versión 4.5.0
-react-native-screens: Versión 3.20.0
-react-redux: Versión 8.1.1
-expo-location: Versión 15.1.1
-expo-sqlite: Versión 11.1.1
+- @react-navigation/bottom-tabs: Versión 6.5.8
+- @react-navigation/native: Versión 6.1.7
+- @react-navigation/native-stack: Versión 6.9.13
+- @react-navigation/stack: Versión 6.3.17
+- @reduxjs/toolkit: Versión 1.9.5
+- expo: Versión 48.0.18
+- expo-font: Versión 11.1.1
+- expo-image-picker: Versión 14.1.1
+- expo-screen-orientation: Versión 5.1.1
+- expo-status-bar: Versión 1.4.4
+- react: Versión 18.2.0
+- react-native: Versión 0.71.8
+- react-native-gesture-handler: Versión 2.9.0
+- react-native-safe-area-context: Versión 4.5.0
+- react-native-screens: Versión 3.20.0
+- react-redux: Versión 8.1.1
+- expo-location: Versión 15.1.1
+- expo-sqlite: Versión 11.1.1
 
 - Asegúrese de que estas bibliotecas estén instaladas correctamente en su proyecto.
