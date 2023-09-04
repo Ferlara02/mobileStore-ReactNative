@@ -3,7 +3,7 @@ import { View, Image } from "react-native";
 import { styles } from "./styles";
 
 const MapPreview = ({ children, location, style, image }) => {
-  console.log(image);
+  
   return (
     <View style={{ ...styles.container, ...style }}>
       {location ? <Image style={styles.mapImage} source={{ uri: image }} /> : children}

@@ -1,5 +1,5 @@
 import { ScrollView, View, Text, Image, TouchableOpacity, ActivityIndicator } from "react-native";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 
 import { styles } from "./styles";
 import { addToCart } from "../../store/cart/cartSlices";

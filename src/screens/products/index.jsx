@@ -1,11 +1,10 @@
 import { Ionicons } from "@expo/vector-icons";
 import { useState } from "react";
-import { View, Text, TouchableOpacity, FlatList, ActivityIndicator } from "react-native";
-import { useSelector } from "react-redux";
+import { View, Text, FlatList, ActivityIndicator } from "react-native";
 
 import { styles } from "./styles";
 import { Input, Product } from "../../components";
-import categories2 from "../../constants/data/categories2.json";
+// import categories2 from "../../constants/data/categories2.json";
 import { useGetProductsByCategoryQuery } from "../../store/products/apis";
 import { COLORS } from "../../themes";
 import { useGetCategoriesQuery } from "../../store/categories/apis";

@@ -1,14 +1,19 @@
-import { useEffect, useState } from "react";
-import { View, Text, TouchableOpacity } from "react-native";
+import { useFocusEffect } from "@react-navigation/native";
+import { useCallback, useEffect, useState } from "react";
+import { View, Text, TouchableOpacity, Image, ScrollView } from "react-native";
+import { FlatList } from "react-native-gesture-handler";
 import { useSelector } from "react-redux";
+
 import { styles } from "./styles";
 import { LocationSelector } from "../../components";
 import { GOOGLE_API_KEY, URL_BASE_GEOCODING } from "../../constants/maps";
-import { insertPlace } from "../../db";
+import { insertPlace, selectPlaces } from "../../db";
 import { useUpdateAddressMutation, useGetProfileQuery } from "../../store/settings/api";
 const Address = ({ navigation }) => {
+  const [places, setPlaces] = useState([]);
   const localId = useSelector((state) => state.auth.user.localId);
   const imageUrl = useSelector((state) => state.address.imageUrl);
+  const [isDisabled, setIsDisabled] = useState(true); //deshabilito el boton confirmar por default para que el usuario no mande datos vacíos al updateAddress
 
   const [location, setLocation] = useState(null);
   const [address, setAddress] = useState(null);
@@ -16,11 +21,12 @@ const Address = ({ navigation }) => {
 
   const onLocation = ({ lat, lng }) => {
     setLocation({ lat, lng });
+    setIsDisabled(false);
   };
 
   const onHandleUpdateLocation = async () => {
-    updateAddress({ localId, address, location });
     const result = await insertPlace({ address, coords: location, image: imageUrl });
+    updateAddress({ localId, address, location });
 
     navigation.navigate("Settings");
   };
@@ -37,20 +43,54 @@ const Address = ({ navigation }) => {
           throw new Error("Something went wrong");
         }
         const address = data.results[0].formatted_address;
-        console.warn(address);
         setAddress(address);
       };
       getGeocoding();
     }
   }, [location]);
 
+  useFocusEffect(
+    useCallback(() => {
+      const getPlaces = async () => {
+        const places1 = await selectPlaces();
+        setPlaces(places1);
+      };
+      getPlaces();
+      console.log("PLACES--->", places);
+      return () => {
+        setPlaces([]);
+      };
+    }, [])
+  );
   return (
-    <View style={styles.container}>
-      <LocationSelector onLocation={onLocation} imageUrl={imageUrl} localId={localId}/>
-      <TouchableOpacity onPress={onHandleUpdateLocation} style={styles.button}>
-        <Text style={styles.text}>Confirm</Text>
-      </TouchableOpacity>
-    </View>
+    <ScrollView style={styles.container}>
+      <View style={styles.contView}>
+        <LocationSelector onLocation={onLocation} imageUrl={imageUrl} localId={localId} />
+        <TouchableOpacity
+          onPress={onHandleUpdateLocation}
+          style={isDisabled ? styles.buttonDisabled : styles.button}
+          disabled={isDisabled}>
+          <Text style={styles.text}>Confirm</Text>
+        </TouchableOpacity>
+        <View style={styles.containerPlaces}>
+          <Text style={styles.titlePlaces}>List of your address</Text>
+          <FlatList
+            data={places}
+            renderItem={({ item }) => (
+              <View style={styles.itemContainer}>
+                <View style={styles.mapImage}>
+                  <Image source={{ uri: item.image }} style={styles.image} />
+                </View>
+                <View style={styles.detail}>
+                  <Text style={styles.detailText}>{item.address}</Text>
+                </View>
+              </View>
+            )}
+            keyExtractor={(item) => item.id.toString()}
+          />
+        </View>
+      </View>
+    </ScrollView>
   );
 };
 

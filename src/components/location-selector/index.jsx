@@ -13,8 +13,9 @@ import MapPreview from "../map-preview";
 const LocationSelector = ({ onLocation, imageUrl, localId }) => {
   const { data: userData, isLoading: isLoadingUserData } = useGetProfileQuery({ localId });
   const [pickedLocation, setPickedLocation] = useState(userData ? userData.location : null);
-
   const dispatch = useDispatch();
+
+  
 
   const verifyPermissions = async () => {
     const { status } = await requestForegroundPermissionsAsync();
@@ -43,12 +44,14 @@ const LocationSelector = ({ onLocation, imageUrl, localId }) => {
 
     setPickedLocation({ lat: latitude, lng: longitude });
     onLocation({ lat: latitude, lng: longitude });
+    
   };
 
   useEffect(() => {
     if (pickedLocation) {
       dispatch(saveImageUrl(image));
     }
+    
   }, [pickedLocation]);
   return (
     <View style={styles.container}>

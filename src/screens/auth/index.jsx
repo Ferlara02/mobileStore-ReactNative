@@ -52,7 +52,7 @@ const Auth = () => {
           email: formState.email.value,
           password: formState.password.value,
         });
-        console.warn(result);
+
         if (result?.data) dispatch(setUser(result.data));
       } else {
         const result = await signUp({

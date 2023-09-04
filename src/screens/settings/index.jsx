@@ -1,4 +1,4 @@
-import { View, Text, FlatList } from "react-native";
+import { View, FlatList } from "react-native";
 
 import { styles } from "./styles";
 import { MenuItem } from "../../components";
@@ -16,6 +16,7 @@ const Settings = ({ navigation }) => {
         data={MENUS}
         renderItem={renderItem}
         keyExtractor={keyExtractor}
+        numColumns={2}
         contentContainerStyle={styles.settingList}
       />
     </View>
